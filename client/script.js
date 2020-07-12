@@ -1,6 +1,10 @@
 const baseurl = 'http://localhost:3000';
 
 async function getProductFromLink(){
+  let loader = document.getElementsByClassName("loader")[0];
+  let app = document.querySelector('#app');
+  app.innerHTML = "";
+  loader.style.visibility = "visible";
   let link = document.getElementById('search').value;
   let resSplit = link.split("/");
   let index; 
@@ -18,7 +22,8 @@ async function getProductFromLink(){
       productId : productId
     });
     let questions = res.data.questionsAnsAnswersArray;
-    var app = document.querySelector('#app');
+    //app = document.querySelector('#app');
+    loader.style.visibility = "hidden";
     app.innerHTML = '<ul>' + questions.map(function (questions) {
       return '<li>' + questions + '</li>';
     }).join('') + '</ul>';
